@@ -1,0 +1,612 @@
+<style type="text/css">
+.payment_top { width: 100%; height: 5rem; background-color: #1f7eff; text-align: center; line-height: 5rem;font-size: 1.5rem;}
+.payment_top span {color: white;}
+.payment_top i {float: right;}
+.payment_content {width: 100%;height: auto;font-size: 1.5rem;}
+.payment_ul {width: 100%;height: 5.15rem;}
+.payment_ul ul {width: 93%;display: flex;margin: 0 auto;border-bottom: 1px solid #EEEEEE;font-family: PingFangSC-Regular, sans-serif;color: #333333;}
+.payment_ul ul li {width: 50%;height: 5.15rem;font-size: 1.5rem;color: #333333;font-family: PingFangSC-Regular, sans-serif; line-height: 5.15rem;}
+.sel_payment {width: 100%;}
+.sel_payment ul {width: 93%; height: 5.15rem; margin: 0 auto;color: #333333;font-family: PingFangSC-Regular, sans-serif;font-size: 1.5rem;}
+.sel_payment ul li { height: 5.15rem;line-height: 5.15rem;border-bottom: 1px solid #EEEEEE;}
+.footer { width: 100%;height: 4.6rem; background-color: orangered;text-align: center; font-size: 1.5rem; line-height: 4.6rem;position: fixed;bottom: 0;color: #FFFFFF; font-family: PingFangSC-Regular, sans-serif;}
+#box {width: 100%;height: 100%;position: absolute;background: rgba(0, 0, 0, 0.65);top: 0;left: 0;z-index: 90;display: none;}
+#hint {width: 64%;background-color: #FFFFFF;position: fixed;z-index: 100;margin-left: -32%; left: 50%;top: 50%;margin-top: -16%;display: none;border-radius: 1rem;font-size: 1.5rem;}
+#hint2 {width: 64%; background-color: #FFFFFF;position: fixed;z-index: 100;left: 50%;margin-left: -32%;top: 50%;margin-top: -32%;display: none;border-radius: 1rem;font-size: 1.5rem;}
+.close {width: 100%;height: 4.17rem;font-size: 1.6rem;color: #333333;text-align: center;line-height: 4.17rem;border-bottom: 1px solid #EEEEEE;}
+.price {width: 100%;height: 7.1rem;text-align: center;padding: 0.5rem 0;}
+.price span {color: #333333;}
+.price p {font-family: PingFangSC-Medium, sans-serif;color: #333333;font-size: 2.8rem;padding-top: 0.2rem;}
+.toPrice {width: 100%;height: 14rem;text-align: center;line-height: 10.89rem;font-size: 1.5rem;color: #333333;font-family: PingFangSC-Medium, sans-serif;}
+.gpscPtItem {width: 100%;height: 3.5rem;text-align: center;align-items: center;}
+.gpscPtItem .iconfont {display: block;width: auto;height: 4rem;line-height: 4rem;}
+.gpscPtItem .iconfont {display: block;width: auto;height: 4rem;line-height: 4rem;position: absolute;z-index: 1;top: 0;right: 0;}
+.gpscPtImg {width: 2rem; height: 2rem;margin-left: 5%;}
+.gpscPwdWrap {display: none;}
+#psAgreeWrap {width: 100%;height: 4rem;}
+#psAgreeWrap a {color: #1f7eff;}
+.password-div {width: 100%;}
+.password-lable ul,li {list-style: none;}
+.password-div input {width: 1px;height: 1px;opacity: 0;border: 0;}
+.password-lable {height: 35px;}
+.password-lable ul {margin: 1rem auto 0;width: 80%;height: 3.5rem;margin: 1.3rem auto;display: flex;}
+.password-lable li {width: 3.5rem;height: 3.5rem;line-height: 3.5rem;text-align: center;border: 1px solid #dedede;margin-left: -1px;font-size: 20px;font-weight: bold;}
+#Split { width: 85%;height: 14%; position: absolute;top: 50%; margin-top: -16%;left: 50%;margin-left: -42.5%; font-size: 1.5rem;display: none;background-color: white;box-shadow: 0px 0px 10px 5px #aaa;}
+.Split_top {width: 100%;height: 60%;}
+.Split_top span {width: 80%;height: 100%;text-align: center;display: block;margin: 0 auto;padding-top: 2%;}
+.Split_down {width: 100%;height: 40%;}
+.Split_down ul {width: 100%; height: 100%;display: flex;border-top: 1px solid;}
+.Split_down ul li {width: 50%;text-align: center;line-height: 100%;padding-top: 2.8%;}
+body {background-color: #fff;}
+#creditPayMsg {text-align: center;color: #ce5a5a;}
+/* --------记住密码------- */
+.logCheckd {font-size: 2rem;width: 1.5rem;height: 1.5rem;line-height: 1.8rem;margin-right: 0.5rem;color: #aaa;}
+.logCheckd2 {font-size: 2rem;width: 1.5rem;height: 1.5rem;line-height: 1.8rem;margin-right: 0.5rem;color: #aaa;}
+.logCheckd3 {font-size: 2rem;width: 1.5rem;height: 1.5rem;line-height: 1.8rem; margin-right: 0.5rem;color: #aaa;}
+.ac {color: #1f7eff;}
+#showOrHide {display: none;}
+</style>
+
+<div class="public_top">
+    <i class="iconfont" onclick="tobackMy()">&#xe720;</i>  <!-- onclick="tobackMy()"-->
+    <span>订单详情</span>
+    <p onclick="tobackMy()" id="orderPayPage">返回</p>
+</div>
+<div class="uimg_im2" onclick="Goservice()">
+    <i class="iconfont icon-tubiaokuquanbu_huaban"></i>
+    <span></span>
+</div>
+<div id="payMescroll" class="mescroll"> 
+    <div> 
+        <div class="payment_content">
+            <div class="payment_ul">
+                <ul>
+                    <li>
+                        订单倒计时：<span id="Otime"></span>
+                    </li>
+                    <li class="Zprice">
+    
+                    </li>
+                </ul>
+            </div>
+            <div class="sel_payment">
+                <ul id="test">
+                    <li class="payIpt1">
+                        授信支付：你有<font style="color: red">￥</font><span style="color: red" id="balance"></span>元授信可用
+                        <!-- <input type="checkbox" name="check1" id="ipt1" style="float:right;margin-top:2rem"> -->
+                        <i class="logCheckd iconfont" style="float:right;margin-top:2rem" id="ipt1"
+                            IptStatus1="false">&#xe605;</i>
+                    </li>
+                    <li class="payIpt2">
+                        现金支付
+                        <!-- <input type="checkbox" name="check2" id="ipt2" style="float:right;margin-top:2rem"> -->
+                        <i class="logCheckd2 iconfont" style="float:right;margin-top:2rem" id="ipt2"
+                            IptStatus2="false">&#xe605;</i>
+                    </li>
+                    <div id="showOrHide">
+                        <li class="payIpt3" style="display: none">
+                            微信支付
+                            <i class="logCheckd3 iconfont" style="float:right;margin-top:2rem" id="ipt3"
+                                IptStatus3="false">&#xe605;</i>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+    
+        </div>
+     </div>
+ </div>
+
+<div id="box"></div>
+
+<div class="footer">
+    <span>确认支付</span>
+</div>
+<div id="hint">
+    <div class="close">
+        <span id="Dclose" style="float:left;font-size: 1.45rem;color: #EEEEEE;margin-left:1rem;">×</span>
+        <span style="margin-left: -2rem;">现金支付</span>
+    </div>
+    <div class="toPrice">
+        <span onclick="psEnterprisePay()" style="margin-right:0.3rem">上传对公转账凭证</span>
+        <i class="iconfont icon-you" style="font-size:1.6rem;"></i>
+    </div>
+    <input id="Times" type="hidden" />
+</div>
+
+<!--  2019年11月7日16:41:16-授信支付 -->
+<div id="hint2">
+    <div class="close">
+        <span id="Dclose2" style="font-size: 3rem;color: #EEEEEE;position: absolute;left: 0.9rem;">×</span>
+        <span style="color:#333333;font-size:1.6rem;font-family: PingFangSC-Medium, sans-serif;">输入密码确认支付</span>
+    </div>
+    <div class="price">
+        <span>轱辘轱辘</span>
+        <p class="Zoprice"></p>
+    </div>
+
+    <div id="payTypeAuth" class="gpscPtItem">
+        <input class="ipt" id="psAgreeCheck" type='checkbox' name='' value=''
+            onchange="psAgreeClick()" />&nbsp;<span>同意</span><a onclick="showCreditPayAgree()">《授信协议》</a>
+    </div>
+    <div class="gpscPwdWrap">
+        <div class="password-div">
+            <label for="password" class="password-lable">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                <input id="payPwdInt" type="password" name="payPwd" maxlength="6">
+            </label>
+        </div>
+        <div id="creditPayMsg"></div>
+    </div>
+</div>
+
+<input id="Cup" type="hidden" />
+<input id="Much" type="hidden" />
+<input id="Sx" type="hidden" />
+<div id="Split">
+    <div class="Split_top">
+        <span>授信余额（699.94）不足，是否愿意拆分订单</span>
+    </div>
+    <div class="Split_down">
+        <ul>
+            <li id="cancel">取消</li>
+            <li style="background-color:blue" onclick="confirm()">确定</li>
+        </ul>
+    </div>
+</div>
+<input type="hidden" id="Goprice" />
+<script type="text/javascript">
+    var orderNo = getParam("orderNo", currUrl);
+    var payMescroll = new MeScroll("payMescroll", { //第一个参数"mescroll"对应上面布局结构div的id (1.3.5版本支持传入dom对象)
+		//如果您的下拉刷新是重置列表数据,那么down完全可以不用配置,具体用法参考第一个基础案例
+		//解析: down.callback默认调用mescroll.resetUpScroll(),而resetUpScroll会将page.num=1,再触发up.callback
+		down: {
+			callback: downCallback //下拉刷新的回调,别写成downCallback(),多了括号就自动执行方法了
+		}
+    });
+    function downCallback() { 
+        presentTimsFunc();
+        creditExtensionFunc();
+        CreateTime();
+     }
+    //支付选择
+    $("#test").find("input[type=checkbox]").bind("click", function () {
+        $("#test").find("input[type=checkbox]").not(this).attr("checked", false);
+    })
+    //支付input
+    //payIpt1
+    $(".payIpt1").click(function () {
+        $(".logCheckd").toggleClass("ac")
+        $(".logCheckd2").removeClass('ac');
+        $(".logCheckd2").html("&#xe605;")
+        $(".logCheckd2").attr("IptStatus2", false);
+        $(".logCheckd3").removeClass('ac');
+        $(".logCheckd3").html("&#xe605;")
+        $(".logCheckd3").attr("IptStatus3", false);
+        if ($(".logCheckd").hasClass("ac")) {
+            $(".logCheckd").attr("IptStatus1", true);
+            $(".logCheckd").html("&#xe72d;");
+
+        } else {
+            $(".logCheckd").html("&#xe605;")
+            $(".logCheckd").attr("IptStatus1", false);
+        }
+    })
+    //payIpt2
+    $(".payIpt2").click(function () {
+        $(".logCheckd2").toggleClass("ac")
+        $(".logCheckd").removeClass('ac');
+        $(".logCheckd").html("&#xe605;")
+        $(".logCheckd").attr("IptStatus1", false);
+        $(".logCheckd3").removeClass('ac');
+        $(".logCheckd3").html("&#xe605;")
+        $(".logCheckd3").attr("IptStatus3", false);
+        if ($(".logCheckd2").hasClass("ac")) {
+            $(".logCheckd2").html("&#xe72d;");
+            $(".logCheckd2").attr("IptStatus2", true);
+        } else {
+            $(".logCheckd2").html("&#xe605;")
+            $(".logCheckd2").attr("IptStatus2", false);
+        }
+    })
+    //payIpt3
+    $(".payIpt3").click(function () {
+        $(".logCheckd3").toggleClass("ac")
+        $(".logCheckd").removeClass('ac');
+        $(".logCheckd").html("&#xe605;")
+        $(".logCheckd").attr("IptStatus1", false);
+        $(".logCheckd2").removeClass('ac');
+        $(".logCheckd2").html("&#xe605;")
+        $(".logCheckd2").attr("IptStatus2", false);
+        if ($(".logCheckd3").hasClass("ac")) {
+            $(".logCheckd3").html("&#xe72d;");
+            $(".logCheckd3").attr("IptStatus3", true);
+        } else {
+            $(".logCheckd3").html("&#xe605;")
+            $(".logCheckd3").attr("IptStatus3", false);
+        }
+    })
+    //点击支付
+    $(".footer").click(function () {
+
+        var a1 = $("#Much").val(); //要支付的多少钱
+        var a2 = $("#Sx").val(); //剩余多少授信额度
+        var StatusIpt1 = $(".logCheckd").attr("IptStatus1");
+        var StatusIpt2 = $(".logCheckd2").attr("IptStatus2");
+        var StatusIpt3 = $(".logCheckd3").attr("IptStatus3");
+        if (StatusIpt1 == "true") {
+            if (Number(a1) > Number(a2)) {
+                Split.style.display = "block";
+            } else {
+                hint2.style.display = "block";
+                box.style.display = "block";
+            }
+        } else if (StatusIpt2 == "true") {
+            hint.style.display = "block";
+            box.style.display = "block";
+        } else if (StatusIpt3 == "true") {
+            psWxPay();
+
+        }
+    })
+    //定时刷新，查询支付结果
+    var st = null;
+
+    function execGetPayStatus(payNo) {
+        st = setInterval(function () {
+            if ($("#youkePayPanel").length > 0) {
+                var url = api_host + "/dealer/pay_order_info.json";
+                var t = new Date().getTime();
+                $.get(url, {
+                    payNo: payNo,
+                    t: t
+                }, function (data) {
+                    if (data.success) {
+                        if (data.obj.payStatus == 1) {
+                            $.jumpDiv.removeDiv();
+                            $.jumpDiv.mTip("支付成功，请耐心等待发货", function () {
+                                $.jumpDiv.removeDiv();
+                                window.location.href = "/dealer/main.html?tab=2";
+                            });
+                        }
+                    }
+                }, "json");
+            } else {
+                clearInterval(st);
+            }
+        }, "1000");
+    }
+    $("#Dclose").click(function () {
+        hint.style.display = "none";
+        box.style.display = "none";
+    })
+    $("#Dclose2").click(function () {
+        hint2.style.display = "none";
+        box.style.display = "none";
+    })
+    $("#box").click(function () {
+        box.style.display = "none";
+        $("#hint").hide();
+        $("#hint2").hide();
+    })
+
+
+    $(function () {
+        presentTimsFunc();
+        creditExtensionFunc();
+        if (downTimeLoading != null) {
+            clearTimeout(downTimeLoading);
+        }
+        CreateTime();
+        //imCountNum();
+    });
+
+    //订单倒计时      2019年11月7日13:01:18
+    function CreateTime() {
+        var memberId = getParam("memberId", currUrl);
+        var url = api_host + "/newdealer/newGet_goods_order.json"
+        post(url, {
+            orderNo: orderNo,
+            memberId: memberId
+        }, function (data) {
+            if (data.success) {
+                payMescroll.endSuccess();
+                //var Countdown=Number(data.obj.remtime); 
+                var cancelParams = orderNo;
+                var isOpenWxPay = data.obj.isOpenWxPay;
+                console.log(isOpenWxPay)
+                if (isOpenWxPay == "yes") {
+                    console.log("yes");
+                    $("#showOrHide").show();
+                } else if (isOpenWxPay == "no") {
+                    console.log("no")
+                    $("#showOrHide").hide();
+                }
+                TimeDown("Otime", data.obj.remtime, 'cancelOrder', cancelParams);
+                var Price = data.obj.totalAmount;
+                //商品0元
+                if (Price == 0) {
+                    $(".payIpt1").hide();
+                    $(".payIpt3").hide();
+                } else {
+                    $(".payIpt1").show();
+                    $(".payIpt3").show();
+                }
+
+                $("#Goprice").val(Price);
+                $(".Zoprice").html("￥" + Price);
+                $("#Much").val(Price);
+                var str = "<span style='float:right'>支付:<font style='color: red'>" + Price + "<font>元</span>";
+                $(".Zprice").html(str);
+            } else {
+                // payMescroll.endErr();
+                var func = function () {
+                    $("#orderPayPage").click();
+                }
+                Lighthint((data.message == null || undefined || '' ? '' : data.message), func);
+            }
+        })
+    }
+    function presentTimsFunc() { 
+        //走后台获取当前时间接口    2019年11月7日13:01:34
+        var url = api_host + "/getNowDateTime.json";
+        post(url, {}, function (data) {
+            if (data.success) {
+                payMescroll.endSuccess(); 
+                var AfterCreateTime = data.obj;
+                $("#Cup").val(AfterCreateTime);
+            }else{
+                // payMescroll.endErr();
+            }
+        })
+     }
+     function creditExtensionFunc() { 
+          //授信额度接口
+        var url = api_host + "/dealer/credit_stat.json";
+        post(url, {}, function (data) {
+            if (data.success) {
+                payMescroll.endSuccess();
+                var o1 = Number(data.obj.baseAvailAmount);
+                var o2 = Number(data.obj.tmpAvailAmount);
+                var o3 = o1 + o2;
+                var balance = o3.toFixed(2)
+                $("#balance").html(balance);
+                $("#Sx").val(balance);
+                $(".Split_top span").html("您的授信余额不足（" + balance + "），是否愿意拆分订单")
+            }else{
+                // payMescroll.endErr();
+            }
+        })
+      }
+    //取消拆分订单 2019年11月8日21:03:17
+    $("#cancel").click(function () {
+        Split.style.display = "none";
+    })
+    //拆分订单操作 2019年11月8日21:03:22
+    var odData = getParam("odData", currUrl);
+    odData = decodeURIComponent(odData);
+    var adrId = getParam("adrId", currUrl);
+
+    function confirm() {
+        var url = api_host + "/dealer/split_order.json"
+        ts = new Date().getTime();
+        get(url, {
+            ts: ts,
+            odData: odData
+        }, function (data) {
+            if (data.success) {
+                $("#Split").hide();
+                pageShow(data);
+                var func = function () {
+                    $("#orderPayPage").click();
+                }
+                Lighthint("拆单完成，请继续确认授信订单", func);
+            } else {
+                Lighthint((data.message == null || undefined || '' ? '' : data.message));
+            }
+        });
+    }
+    //去对公转账---2019年11月7日16:15:30
+    function psEnterprisePay() {
+        var url = api_host + "/dealer/maker_pay_order.json";
+        get(url, {
+            orderNo: orderNo,
+            payWay: "ENTERPRISE"
+        }, function (data) {
+            if (data.success) {
+                $.jumpDiv.removeDiv();
+                newPanel('/dealer/panel/enterprise_pay.html?payNo=' + data.obj);
+                $("#hint").hide();
+                $("#box").hide();
+
+            } else {
+                $.jumpDiv.removeDiv();
+                $.jumpDiv.mTip(data.message, function () {
+                    $.jumpDiv.removeDiv();
+                });
+            }
+        });
+    }
+    //返回
+    function goHome() {
+        var url = "/dealer/main.html";
+        newPanel(url);
+    }
+    //未知
+    function psWxPay() {
+        var url = api_host + "/dealer/maker_pay_order.json";
+        get(url, {
+            orderNo: orderNo,
+            payWay: "MWEB"
+        }, function (data) {
+            if (data.success) {
+                url = api_host + "/wx_pre_pay.json";
+                get(url, {
+                    payNo: data.obj
+                }, function (data2) {
+                    if (data2.success) {
+                        var mwebUrl = data2.obj.mwebUrl;
+                        window.location.href = mwebUrl;
+                        execGetPayStatus(data.obj);
+                    } else {
+                        $.jumpDiv.removeDiv();
+                        hideLoading();
+                        var func = function () {
+                            $("#orderPayPage").click();
+                        }
+                        Lighthint((data2.message == null || undefined || '' ? '' : data2.message),
+                            func);
+                    }
+                })
+            } else {
+                hideLoading();
+                Lighthint((data.message == null || undefined || '' ? '' : data.message));
+            }
+        })
+    }
+
+    function psAgreeClick() {
+        var c = $("#psAgreeCheck").prop("checked");
+        if (c) {
+            $(".gpscPwdWrap").show();
+        } else {
+            $(".gpscPwdWrap").hide();
+        }
+    }
+
+    function showCreditPayAgree() {
+        $(".upDivW,.upDiv").hide();
+        newPanel('/dealer/panel/credit_pay_agreement.html');
+    }
+
+
+    var psUpDivPt = 0;
+    $(function () {
+        getPayTypeList();
+
+        $(".password-div input").on("input", function (e) { //标签为password-div下的input添加oninput事件
+            var number = 6; //定义输入最大值
+            var pw = $("input[name = 'payPwd']").val(); //定义pw为name是password的input框的输入值
+            var list = $(".password-div ul li"); //定义list是li
+            for (var i = 0; i < number; i++) { //for循环遍历将·放入li标签
+                if (pw[i]) {
+                    $(list[i]).text("·");
+                } else {
+                    $(list[i]).text("");
+                };
+            };
+
+            if ($("#payPwdInt").val().length == 6) {
+                creditPay($("#payPwdInt").val());
+            }
+        });
+        $(".password-div ul").click(function () {
+            $("input[name = 'payPwd']").val("");
+            $("#payPwdInt").focus();
+            $(".password-div ul li").text("");
+
+            psUpDivPt = $(".upDiv").css("top");
+            $(".upDiv").css({
+                "top": "10px"
+            })
+        });
+
+        $("#payPwdInt").blur(function () {
+            $(".upDiv").css({
+                "top": psUpDivPt
+            })
+        });
+    });
+
+    $(".homeNewTsBox_2").click(function () {
+        $(".homeNewTs").hide()
+    })
+
+    function creditPay(pwd) {
+        $("#creditPayMsg").html('');
+        var url = api_host + "/dealer/credit_pay.json";
+        var ts = new Date().getTime();
+
+        get(url, {
+            orderNo: orderNo,
+            payPwd: pwd,
+            ts: ts
+        }, function (data) {
+            if (data.success) {
+                setTimeout(function () {
+                    newPanel('/dealer/panel/success.html?price=' + $("#Goprice").val() + '&orderNo=' +
+                        orderNo);
+                }, 50);
+
+                $.jumpDiv.removeDiv();
+            } else {
+                $(".password-div ul li").text('');
+                $(".homeNewTs").show();
+                $(".homeNewTsBox_1").html((data.message == null || undefined || '' ? '' : data.message));
+                $.jumpDiv.removeDiv();
+            }
+        });
+    }
+
+    //定时刷新，查询支付结果
+    var st = null;
+
+    function execGetPayStatus(payNo) {
+        st = setInterval(function () {
+            if ($("#gpscPt1").length > 0) {
+                var url = api_host + "/dealer/pay_order_info.json";
+                var t = new Date().getTime();
+                get(url, {
+                    payNo: payNo,
+                    t: t
+                }, function (data) {
+                    if (data.success) {
+                        if (data.obj.payStatus == 1) {
+                            $.jumpDiv.removeDiv();
+                            $.jumpDiv.mTip("支付成功", function () {
+                                $.jumpDiv.removeDiv();
+
+                                odPaySuccessBack();
+                            });
+                        }
+                    }
+                });
+            } else {
+                clearInterval(st);
+            }
+        }, "1000");
+    }
+
+    function getPayTypeList() {
+        var url = api_host + "/dealer/pay_type_list.json";
+        var ts = new Date().getTime();
+        get(url, {
+            ts: ts
+        }, function (data) {
+            if (data.success) {
+                var o = data.obj;
+                for (var pt in o) {
+                    var ptId = o[pt];
+                    $("#" + ptId).show();
+                }
+            } else {
+                $.jumpDiv.mTip(data.message, function () {
+                    $.jumpDiv.removeDiv();
+                });
+            }
+        });
+    }
+    function tobackMy() { 
+        window.location.href = "/dealer/main.html?tab=0";
+     }
+    function cancelOrder(params) {
+        alert('xxxxx')
+    }
+</script>
